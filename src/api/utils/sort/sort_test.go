@@ -1,6 +1,9 @@
 package sort
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 func TestBubble(t *testing.T) {
 	slice := []int{4, 8, 1, 5, 2, 9}
@@ -30,6 +33,26 @@ func TestSort(t *testing.T) {
 	}
 }
 
+func TestBubbleWithTimeout(t *testing.T) {
+	reachedTimeoutChannel := make(chan bool, 1)
+	defer close(reachedTimeoutChannel)
+
+	go func() {
+		Bubble(CreateSliceWithNElements(10))
+		reachedTimeoutChannel <- false
+	}()
+
+	go func() {
+		time.Sleep(50 * time.Millisecond)
+		reachedTimeoutChannel <- true
+	}()
+
+	if <-reachedTimeoutChannel {
+		t.Errorf("the bubblesort execution reached 50 ms timeout")
+	}
+}
+
+// go test --bench=. -count 5
 // slice := []int{4, 8, 1, 5, 2, 9}
 // BenchmarkBubble-16      365.397.691                3.775 ns/op
 // BenchmarkBubble-16      360.098.990                3.135 ns/op
@@ -39,7 +62,7 @@ func TestSort(t *testing.T) {
 // BenchmarkBubble-16        166887              6372 ns/op
 // BenchmarkBubble-16        277129              5629 ns/op
 // slice := getElements(100000) 100k
-// BenchmarkBubble-16             1        15039330.900 ns/op
+// BenchmarkBubble-16             1        15039330900 ns/op
 // BenchmarkBubble-16             1        13167436300 ns/op
 // BenchmarkBubble-16             1        13713001000 ns/op
 func BenchmarkBubble(b *testing.B) {
@@ -52,6 +75,7 @@ func BenchmarkBubble(b *testing.B) {
 	}
 }
 
+// go test --bench=. -count 5
 // slice := []int{4, 8, 1, 5, 2, 9}
 // BenchmarkSort-16        15.596.385                79.59 ns/op
 // BenchmarkSort-16        12.949.593                92.92 ns/op
