@@ -30,17 +30,6 @@ func GetCountry(countryID string) (*locations.Country, *errors.ApiError) {
 	decoder := json.NewDecoder(response.Body)
 
 	if response.StatusCode > 299 {
-		apiError := &errors.ApiError{}
-		if err = decoder.Decode(apiError); err != nil {
-			return nil, &errors.ApiError{
-				Status:  http.StatusInternalServerError,
-				Message: fmt.Sprintf("invalid error response interface when trying get '%s' country", countryID),
-			}
-		}
-		return nil, apiError
-	}
-
-	if response.StatusCode > 299 {
 		return nil, nonSuccessStatusCode(decoder, countryID)
 	}
 
