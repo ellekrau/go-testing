@@ -1,6 +1,9 @@
 package services
 
-import "testing"
+import (
+	"go-testing/src/api/utils/sort"
+	"testing"
+)
 
 func TestSort(t *testing.T) {
 	slice := []int{4, 8, 1, 5, 2, 9}
@@ -17,7 +20,7 @@ func TestSort(t *testing.T) {
 }
 
 func TestSortLenBiggerThan10k(t *testing.T) {
-	slice := getElements(10001)
+	slice := sort.CreateSliceWithNElements(10001)
 
 	Sort(slice)
 
@@ -31,7 +34,7 @@ func TestSortLenBiggerThan10k(t *testing.T) {
 }
 
 func TestSortLenEquals10k(t *testing.T) {
-	slice := getElements(10000)
+	slice := sort.CreateSliceWithNElements(10000)
 
 	Sort(slice)
 
@@ -45,7 +48,7 @@ func TestSortLenEquals10k(t *testing.T) {
 }
 
 func TestSortLenSmallerThan10k(t *testing.T) {
-	slice := getElements(9999)
+	slice := sort.CreateSliceWithNElements(9999)
 
 	Sort(slice)
 
@@ -56,14 +59,4 @@ func TestSortLenSmallerThan10k(t *testing.T) {
 	if slice[9998] != 9998 {
 		t.Errorf("last slice element should be '10000'")
 	}
-}
-
-func getElements(n int) (result []int) {
-	result = make([]int, n)
-	j := 0
-	for i := n - 1; i > 0; i-- {
-		result[j] = i
-		j++
-	}
-	return
 }

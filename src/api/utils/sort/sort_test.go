@@ -30,16 +30,6 @@ func TestSort(t *testing.T) {
 	}
 }
 
-func getElements(n int) (result []int) {
-	result = make([]int, n)
-	j := 0
-	for i := n - 1; i > 0; i-- {
-		result[j] = i
-		j++
-	}
-	return
-}
-
 // slice := []int{4, 8, 1, 5, 2, 9}
 // BenchmarkBubble-16      365.397.691                3.775 ns/op
 // BenchmarkBubble-16      360.098.990                3.135 ns/op
@@ -55,7 +45,7 @@ func getElements(n int) (result []int) {
 func BenchmarkBubble(b *testing.B) {
 	//slice := []int{4, 8, 1, 5, 2, 9}
 	//slice := getElements(100000)
-	slice := getElements(10000)
+	slice := CreateSliceWithNElements(10000)
 
 	for i := 0; i < b.N; i++ {
 		Bubble(slice)
@@ -77,7 +67,7 @@ func BenchmarkBubble(b *testing.B) {
 func BenchmarkSort(b *testing.B) {
 	//slice := []int{4, 8, 1, 5, 2, 9}
 	//slice := getElements(100000)
-	slice := getElements(10000)
+	slice := CreateSliceWithNElements(10000)
 
 	for i := 0; i < b.N; i++ {
 		Sort(slice)

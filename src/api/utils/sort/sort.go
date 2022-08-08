@@ -18,3 +18,13 @@ func Bubble(slice []int) {
 func Sort(slice []int) {
 	sort.Ints(slice)
 }
+
+func CreateSliceWithNElements(n int) (result []int) {
+	result = make([]int, n)
+	j := 0
+	for i := n - 1; i > 0; i-- {
+		result[j] = i
+		j++
+	}
+	return
+}
