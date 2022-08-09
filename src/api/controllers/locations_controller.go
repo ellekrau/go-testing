@@ -11,7 +11,7 @@ func GetCountry(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Add("Content-Type", "application/json")
 
 	countryID := strings.Replace(request.URL.Path, "/locations/country/", "", 1)
-	country, apiError := services.GetCountry(countryID)
+	country, apiError := services.LocationService.GetCountry(countryID)
 	if apiError != nil {
 		writer.WriteHeader(apiError.Status)
 		responseBody, _ := json.Marshal(*apiError)
