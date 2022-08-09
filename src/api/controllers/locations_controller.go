@@ -15,12 +15,12 @@ func GetCountry(writer http.ResponseWriter, request *http.Request) {
 	if apiError != nil {
 		writer.WriteHeader(apiError.Status)
 		responseBody, _ := json.Marshal(*apiError)
-		writer.Write(responseBody)
+		_, _ = writer.Write(responseBody)
 		return
 	}
 
 	writer.WriteHeader(http.StatusOK)
 	responseBody, _ := json.Marshal(*country)
-	writer.Write(responseBody)
+	_, _ = writer.Write(responseBody)
 	return
 }

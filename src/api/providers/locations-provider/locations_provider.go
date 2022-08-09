@@ -10,11 +10,22 @@ import (
 )
 
 var (
-	timeoutLimit  = 2000
-	getCountryUri = "https://api.mercadolibre.com/countries"
+	timeoutLimit      = 2000
+	getCountryUri     = "https://api.mercadolibre.com/countries"
+	LocationsProvider locationsProviderInterface
 )
 
-func GetCountry(countryID string) (*locations.Country, *errors.ApiError) {
+type locationsProviderInterface interface {
+	GetCountry(countryID string) (*locations.Country, *errors.ApiError)
+}
+
+type locationsProvider struct{}
+
+func init() {
+	LocationsProvider = &locationsProvider{}
+}
+
+func (lp *locationsProvider) GetCountry(countryID string) (*locations.Country, *errors.ApiError) {
 	httpClient := http.Client{
 		Timeout: time.Millisecond * time.Duration(timeoutLimit),
 	}
