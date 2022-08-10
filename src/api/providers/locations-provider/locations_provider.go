@@ -11,7 +11,7 @@ import (
 
 var (
 	timeoutLimit      = 2000
-	getCountryUri     = "https://api.mercadolibre.com/countries"
+	GetCountryUri     = "https://api.mercadolibre.com/countries"
 	LocationsProvider locationsProviderInterface
 )
 
@@ -30,7 +30,7 @@ func (lp *locationsProvider) GetCountry(countryID string) (*locations.Country, *
 		Timeout: time.Millisecond * time.Duration(timeoutLimit),
 	}
 
-	response, err := httpClient.Get(fmt.Sprintf("%s/%s", getCountryUri, countryID))
+	response, err := httpClient.Get(fmt.Sprintf("%s/%s", GetCountryUri, countryID))
 	if err != nil {
 		return nil, &errors.ApiError{
 			Status:  http.StatusInternalServerError,

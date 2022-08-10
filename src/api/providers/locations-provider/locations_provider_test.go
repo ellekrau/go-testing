@@ -21,9 +21,9 @@ func TestGetCountryApiValidJsonResponse(t *testing.T) {
 		writer.Write([]byte(`{"id":"BR","name":"Brasil","time_zone":"GMT-03:00","geo_information":{"location":{"latitude":-23.6821604,"longitude":-46.875494}},"states":[{"id":"BR-AC","name":"Acre"},{"id":"BR-AL","name":"Alagoas"},{"id":"BR-AP","name":"Amapá"},{"id":"BR-AM","name":"Amazonas"},{"id":"BR-BA","name":"Bahia"},{"id":"BR-CE","name":"Ceará"},{"id":"BR-DF","name":"Distrito Federal"},{"id":"BR-ES","name":"Espírito Santo"},{"id":"BR-GO","name":"Goiás"},{"id":"BR-MA","name":"Maranhão"},{"id":"BR-MT","name":"Mato Grosso"},{"id":"BR-MS","name":"Mato Grosso do Sul"},{"id":"BR-MG","name":"Minas Gerais"},{"id":"BR-PR","name":"Paraná"},{"id":"BR-PB","name":"Paraíba"},{"id":"BR-PA","name":"Pará"},{"id":"BR-PE","name":"Pernambuco"},{"id":"BR-PI","name":"Piauí"},{"id":"BR-RN","name":"Rio Grande do Norte"},{"id":"BR-RS","name":"Rio Grande do Sul"},{"id":"BR-RJ","name":"Rio de Janeiro"},{"id":"BR-RO","name":"Rondônia"},{"id":"BR-RR","name":"Roraima"},{"id":"BR-SC","name":"Santa Catarina"},{"id":"BR-SE","name":"Sergipe"},{"id":"BR-SP","name":"São Paulo"},{"id":"BR-TO","name":"Tocantins"}]}`))
 	}))
 	defer mockServer.Close()
-	getCountryUri = mockServer.URL
+	GetCountryUri = mockServer.URL
 
-	country, err := GetCountry("BR")
+	country, err := LocationsProvider.GetCountry("BR")
 
 	if country == nil {
 		t.Fatal("country shouldn't be nil")
@@ -60,9 +60,9 @@ func TestGetCountryApiCountryNotFoundError(t *testing.T) {
 		writer.Write(response)
 	}))
 	defer mockServer.Close()
-	getCountryUri = mockServer.URL
+	GetCountryUri = mockServer.URL
 
-	country, err := GetCountry("BRA")
+	country, err := LocationsProvider.GetCountry("BRA")
 
 	if country != nil {
 		t.Errorf("country should be nil")
@@ -87,9 +87,9 @@ func TestGetCountryApiInvalidJsonResponse(t *testing.T) {
 		writer.Write([]byte(`{"id":123"}`))
 	}))
 	defer mockServer.Close()
-	getCountryUri = mockServer.URL
+	GetCountryUri = mockServer.URL
 
-	country, err := GetCountry("")
+	country, err := LocationsProvider.GetCountry("")
 
 	if country != nil {
 		t.Errorf("country should be nil")
@@ -114,9 +114,9 @@ func TestGetCountryRestClientError(t *testing.T) {
 		writer.WriteHeader(http.StatusOK)
 	}))
 	defer mockServer.Close()
-	getCountryUri = mockServer.URL
+	GetCountryUri = mockServer.URL
 
-	country, err := GetCountry("BR")
+	country, err := LocationsProvider.GetCountry("BR")
 
 	if country != nil {
 		t.Errorf("country should be nil")
@@ -141,9 +141,9 @@ func TestGetCountryApiInvalidErrorInterface(t *testing.T) {
 		writer.Write([]byte(`{"status": "404","message": "Country not found"}`))
 	}))
 	defer mockServer.Close()
-	getCountryUri = mockServer.URL
+	GetCountryUri = mockServer.URL
 
-	country, err := GetCountry("BR")
+	country, err := LocationsProvider.GetCountry("BR")
 
 	if country != nil {
 		t.Fatal("country should be nil")
