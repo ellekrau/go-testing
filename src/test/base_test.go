@@ -1,7 +1,7 @@
 package test
 
 import (
-	"go-testing/src/api/server"
+	"go-testing/server"
 	"os"
 	"testing"
 )

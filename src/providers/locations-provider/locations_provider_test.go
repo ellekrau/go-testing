@@ -2,7 +2,7 @@ package locationsprovider
 
 import (
 	"encoding/json"
-	"go-testing/src/api/utils/errors"
+	"go-testing/utils/errors"
 	"net/http"
 	"net/http/httptest"
 	"testing"

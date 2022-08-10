@@ -1,9 +1,9 @@
 package services
 
 import (
-	"go-testing/src/api/domain/locations"
-	locationsprovider "go-testing/src/api/providers/locations-provider"
-	"go-testing/src/api/utils/errors"
+	"go-testing/domain/locations"
+	locationsprovider "go-testing/providers/locations-provider"
+	"go-testing/utils/errors"
 	"strings"
 )
 

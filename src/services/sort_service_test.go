@@ -1,7 +1,7 @@
 package services
 
 import (
-	"go-testing/src/api/utils/sort"
+	"go-testing/utils/sort"
 	"testing"
 )
 

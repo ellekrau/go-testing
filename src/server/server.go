@@ -2,7 +2,7 @@ package server
 
 import (
 	"fmt"
-	"go-testing/src/api/controllers"
+	"go-testing/controllers"
 	"log"
 	"net/http"
 )

@@ -1,6 +1,6 @@
 package main
 
-import "go-testing/src/api/server"
+import "go-testing/server"
 
 func main() {
 	server.StartServer()

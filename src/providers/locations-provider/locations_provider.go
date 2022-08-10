@@ -3,8 +3,8 @@ package locationsprovider
 import (
 	"encoding/json"
 	"fmt"
-	"go-testing/src/api/domain/locations"
-	"go-testing/src/api/utils/errors"
+	"go-testing/domain/locations"
+	"go-testing/utils/errors"
 	"net/http"
 	"time"
 )

@@ -2,9 +2,9 @@ package test
 
 import (
 	"encoding/json"
-	"go-testing/src/api/domain/locations"
-	locationsprovider "go-testing/src/api/providers/locations-provider"
-	"go-testing/src/api/utils/errors"
+	"go-testing/domain/locations"
+	locationsprovider "go-testing/providers/locations-provider"
+	"go-testing/utils/errors"
 	"net/http"
 	"net/http/httptest"
 	"testing"

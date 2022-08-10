@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
-	"go-testing/src/api/services"
+	"go-testing/services"
 	"net/http"
 	"strings"
 )

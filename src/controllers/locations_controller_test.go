@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"encoding/json"
-	"go-testing/src/api/domain/locations"
-	"go-testing/src/api/services"
-	"go-testing/src/api/utils/errors"
+	"go-testing/domain/locations"
+	"go-testing/services"
+	"go-testing/utils/errors"
 	"net/http"
 	"net/http/httptest"
 	"testing"
