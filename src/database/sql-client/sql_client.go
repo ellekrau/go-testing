@@ -5,6 +5,16 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
+	"os"
+)
+
+var (
+	dbClient sqlClientInterface
+)
+
+const (
+	environment = "ENVIRONMENT"
+	production  = "PRODUCTION"
 )
 
 type (
@@ -17,7 +27,16 @@ type (
 	}
 )
 
+func isProduction() bool {
+	return os.Getenv(environment) == production
+}
+
 func Open(driverName, connectionString string) (sqlClientInterface, error) {
+	if isMocked && !isProduction() {
+		dbClient = &sqlClientMock{}
+		return dbClient, nil
+	}
+
 	if driverName == "" {
 		return nil, fmt.Errorf("sql-client driver name input is empty")
 	}
@@ -31,7 +50,8 @@ func Open(driverName, connectionString string) (sqlClientInterface, error) {
 		return nil, fmt.Errorf("sql client ping error: %s", err.Error())
 	}
 
-	return &sqlClient{db: db}, nil
+	dbClient = &sqlClient{db: db}
+	return dbClient, nil
 }
 
 func (sc *sqlClient) Query(query string, args ...any) (rowsInterface, error) {
